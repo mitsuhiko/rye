@@ -1,8 +1,12 @@
-use std::process::Command;
-
-use anyhow::{bail, Context, Error};
+use anyhow::{bail, Context, Error, Ok};
 use clap::{CommandFactory, Parser};
 use clap_complete::Shell;
+use std::collections::HashMap;
+use std::fs;
+use std::io::{Read, Write};
+use std::process::Command;
+
+use crate::platform::get_app_dir;
 
 /// Rye self management
 #[derive(Parser, Debug)]
@@ -17,6 +21,9 @@ pub struct CompletionCommand {
     /// The shell to generate a completion script for (defaults to 'bash').
     #[arg(short, long)]
     shell: Option<Shell>,
+    /// Install completion script to shell.
+    #[arg(long)]
+    install: bool,
 }
 
 /// Performs an update of rye.
@@ -50,13 +57,17 @@ pub fn execute(cmd: Args) -> Result<(), Error> {
 }
 
 fn completion(args: CompletionCommand) -> Result<(), Error> {
-    clap_complete::generate(
-        args.shell.unwrap_or(Shell::Bash),
-        &mut super::Args::command(),
-        "rye",
-        &mut std::io::stdout(),
-    );
-
+    let shell = args.shell.unwrap_or(Shell::Bash);
+    if !args.install {
+        clap_complete::generate(
+            shell,
+            &mut super::Args::command(),
+            "rye",
+            &mut std::io::stdout(),
+        );
+        return Ok(());
+    }
+    install_completion(shell)?;
     Ok(())
 }
 
@@ -82,6 +93,79 @@ fn update(args: UpdateCommand) -> Result<(), Error> {
         bail!("failed to self-update via cargo-install");
     }
     helper.disarm();
+
+    Ok(())
+}
+
+fn install_completion(shell: Shell) -> Result<(), Error> {
+    let completion_dir = get_app_dir().join("completion");
+    fs::create_dir_all(&completion_dir)?;
+
+    let shell_map = HashMap::from([
+        (Shell::Bash, ("rye-completion.bash", ".bash_profile")),
+        (Shell::Zsh, ("_rye", ".zshrc")),
+        (Shell::Fish, ("rye.fish", ".config/fish/completions")),
+    ]);
+
+    if !shell_map.contains_key(&shell) {
+        bail!("Unsupported install completion for this shell");
+    }
+    let shell_completion_file = completion_dir.join(shell_map[&shell].0);
+    // generate completion script
+    clap_complete::generate(
+        shell,
+        &mut super::Args::command(),
+        "rye",
+        &mut fs::File::create(&shell_completion_file)?,
+    );
+
+    let shell_config_file = simple_home_dir::home_dir()
+        .unwrap()
+        .join(shell_map[&shell].1);
+
+    // fish shell completion is a bit special
+    if shell == Shell::Fish {
+        fs::create_dir_all(shell_config_file.clone())?;
+        fs::copy(
+            shell_completion_file.clone(),
+            shell_config_file.join("rye.fish"),
+        )?;
+        eprintln!(
+            "enabled completion to {}, if not work, run this: \n cp {} {}",
+            shell,
+            shell_completion_file.display(),
+            shell_config_file.join("rye.fish").display()
+        );
+        return Ok(());
+    }
+
+    let enable_cmd = match shell {
+        Shell::Bash => format!("\nsource {}\n", shell_completion_file.display()),
+        Shell::Zsh => format!(
+            "\nfpath=($fpath {}) && compinit\n",
+            completion_dir.display()
+        ),
+        _ => String::new(),
+    };
+    // write completion script to shell config file
+    let mut shell_config_fs = fs::OpenOptions::new()
+        .append(true)
+        .read(true)
+        .create(true)
+        .open(shell_config_file)?;
+
+    let mut shell_config = String::new();
+    shell_config_fs.read_to_string(&mut shell_config)?;
+    if !shell_config.contains(&enable_cmd) {
+        shell_config_fs
+            .write(enable_cmd.as_bytes())
+            .context("failed to install shell completion")?;
+    }
+
+    eprintln!(
+        "enabled completion to {}, if not work, add this to your shell config:\n {}",
+        shell, enable_cmd
+    );
 
     Ok(())
 }

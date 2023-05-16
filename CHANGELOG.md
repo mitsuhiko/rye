@@ -5,6 +5,8 @@ is the one you can install as mainline should always be stable.  Here are the
 most recent changes however.
 
 ## May
+- Added `--install` for `rye self completion` to install the completion script
+  directly into the shell's configuration.
 
 - Rye now includes a `publish` command for publishing Python packages to a
   package repository.  #86
