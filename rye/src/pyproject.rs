@@ -886,6 +886,11 @@ impl PyProject {
         })?;
         Ok(())
     }
+
+    /// Is this only a workspace, not a package?
+    pub fn project_only(&self) -> bool {
+        is_project_only(&self.doc)
+    }
 }
 
 pub fn normalize_package_name(x: &str) -> String {
@@ -1119,6 +1124,14 @@ fn is_rye_managed(doc: &Document) -> bool {
     doc.get("tool")
         .and_then(|x| x.get("rye"))
         .and_then(|x| x.get("managed"))
+        .and_then(|x| x.as_bool())
+        .unwrap_or(false)
+}
+
+fn is_project_only(doc: &Document) -> bool {
+    doc.get("tool")
+        .and_then(|x| x.get("rye"))
+        .and_then(|x| x.get("project-only"))
         .and_then(|x| x.as_bool())
         .unwrap_or(false)
 }

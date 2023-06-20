@@ -48,6 +48,9 @@ pub struct Args {
     /// Set "Private :: Do Not Upload" classifier, used for private projects
     #[arg(long)]
     private: bool,
+    /// Only a project, not a package.
+    #[arg(long)]
+    project_only: bool,
 }
 
 /// The pyproject.toml template
@@ -91,6 +94,9 @@ build-backend = "pdm.backend"
 
 [tool.rye]
 managed = true
+{%- if project_only %}
+project-only = true
+{%- endif %}
 
 {%- if build_system == "hatchling" %}
 
@@ -237,7 +243,6 @@ pub fn execute(cmd: Args) -> Result<(), Error> {
     };
 
     let private = cmd.private;
-
     let rv = env.render_named_str(
         "pyproject.json",
         TOML_TEMPLATE,
@@ -250,6 +255,7 @@ pub fn execute(cmd: Args) -> Result<(), Error> {
             with_readme,
             build_system,
             private,
+            project_only => cmd.project_only,
         },
     )?;
     fs::write(&toml, rv).context("failed to write pyproject.toml")?;

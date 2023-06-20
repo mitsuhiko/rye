@@ -96,6 +96,9 @@ pub fn execute(cmd: Args) -> Result<(), Error> {
     }
 
     for project in projects {
+        if project.project_only() {
+            continue;
+        }
         if output != CommandOutput::Quiet {
             eprintln!("building {}", style(project.normalized_name()?).cyan());
         }
