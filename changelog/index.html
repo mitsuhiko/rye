@@ -1,0 +1,1362 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An Experimental Package Management Solution for Python">
+      
+      
+      
+      
+        <link rel="prev" href="../community/">
+      
+      
+        <link rel="next" href="../philosophy/">
+      
+      <link rel="icon" href="../static/favicon.svg">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+    
+    
+      
+        <title>Changelog - Rye</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../static/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  
+  <script>
+    function __primePlatformTabs() {
+      const browserPlatform = navigator.platform || "";
+      const tabs = __md_get("__tabs") || [];
+      let changed = false;
+
+      function unshiftTab(name) {
+        if (tabs.indexOf(name) < 0) {
+          tabs.unshift(name);
+          changed = true;
+        }
+      }
+
+      if (/(mac|iphone|ipad)/i.test(browserPlatform)) {
+        unshiftTab("Unix");
+        unshiftTab("macOS");
+      } else if (/linux/i.test(browserPlatform)) {
+        unshiftTab("Unix");
+        unshiftTab("Linux");
+      } else if (/win/i.test(browserPlatform)) {
+        unshiftTab("Windows");
+      }
+
+      if (changed) {
+        __md_set("__tabs", tabs);
+      }
+    }
+
+    __primePlatformTabs();
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Rye" class="md-header__button md-logo" aria-label="Rye" data-md-component="logo">
+      
+  <img src="../static/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rye
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mitsuhiko/rye" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mitsuhiko/rye
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+<script>
+  (function() {
+    function changeColorScheme(light) {
+      document.body.setAttribute("data-md-color-scheme", light ? "default" : "slate");
+    }
+    const media = matchMedia("(prefers-color-scheme: light)");
+    changeColorScheme(media.matches);
+    media.addEventListener("change", function (e) {
+      changeColorScheme(e.matches);
+    });
+  })();
+</script>
+
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Welcome
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../guide/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../community/" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Changelog
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../philosophy/" class="md-tabs__link">
+      Philosophy
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Rye" class="md-nav__button md-logo" aria-label="Rye" data-md-component="logo">
+      
+  <img src="../static/logo.svg" alt="logo">
+
+    </a>
+    Rye
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mitsuhiko/rye" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mitsuhiko/rye
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/basics/" class="md-nav__link">
+        Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/config/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/shims/" class="md-nav__link">
+        Shims
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/pyproject/" class="md-nav__link">
+        Python Project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/sync/" class="md-nav__link">
+        Syncing and Locking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/publish/" class="md-nav__link">
+        Building and Publishing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/sources/" class="md-nav__link">
+        Dependency Sources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/deps/" class="md-nav__link">
+        Dependencies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+          Toolchains
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          Toolchains
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/toolchains/" class="md-nav__link">
+        Toolchain Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/toolchains/cpython/" class="md-nav__link">
+        Portable CPython
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/toolchains/pypy/" class="md-nav__link">
+        PyPy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../community/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Changelog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Changelog
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0100" class="md-nav__link">
+    0.10.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#090" class="md-nav__link">
+    0.9.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#080" class="md-nav__link">
+    0.8.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#070" class="md-nav__link">
+    0.7.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#060" class="md-nav__link">
+    0.6.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#050" class="md-nav__link">
+    0.5.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#040" class="md-nav__link">
+    0.4.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#030" class="md-nav__link">
+    0.3.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#020" class="md-nav__link">
+    0.2.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#012" class="md-nav__link">
+    0.1.2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#011" class="md-nav__link">
+    0.1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010" class="md-nav__link">
+    0.1.0
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../philosophy/" class="md-nav__link">
+        Philosophy
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/mitsuhiko/rye/edit/main/docs/changelog.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="changelog">Changelog</h1>
+<p>Here you can find all the released changes to Rye.  If you want to also see
+the in-development changes that were not released yet, refer to the
+<a href="https://github.com/mitsuhiko/rye/blob/main/CHANGELOG.md">CHANGELOG.md</a> file
+in the repository.</p>
+<!-- BEGIN INCLUDE ../CHANGELOG.md '&lt;!-- released start --&gt;' '' -->
+
+<h2 id="0100">0.10.0</h2>
+<p>Released on 2023-07-07</p>
+<ul>
+<li>
+<p>Fixed a bug with <code>rye init</code> not operating correctly due to a argument conflict.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/346" title="GitHub Issue mitsuhiko/rye #346">#346</a></p>
+</li>
+<li>
+<p>Scripts now support a PDM style <code>call</code> script type.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/345" title="GitHub Issue mitsuhiko/rye #345">#345</a></p>
+</li>
+<li>
+<p>The <code>init</code> command is now capable of importing existing projects.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/265" title="GitHub Issue mitsuhiko/rye #265">#265</a></p>
+</li>
+<li>
+<p>Fixed the global shim behavior on Windows.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/344" title="GitHub Issue mitsuhiko/rye #344">#344</a></p>
+</li>
+</ul>
+<h2 id="090">0.9.0</h2>
+<p>Released on 2023-06-21</p>
+<ul>
+<li>
+<p>The internal Rye Python version is now 3.11.</p>
+</li>
+<li>
+<p>Rye now emits most messages, most of the time to stdout rather than stderr.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/342" title="GitHub Issue mitsuhiko/rye #342">#342</a></p>
+</li>
+<li>
+<p><code>rye add</code> now accepts <code>--pin</code> to let one override the type of pin to use.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/341" title="GitHub Issue mitsuhiko/rye #341">#341</a></p>
+</li>
+<li>
+<p>Added <code>rye config</code> to read and manipulate the <code>config.toml</code> file.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/339" title="GitHub Issue mitsuhiko/rye #339">#339</a></p>
+</li>
+<li>
+<p>Added support for the new <code>behavior.global-python</code> flag which turns on global
+  Python shimming.  When enabled then the <code>python</code> shim works even outside of
+  Rye managed projects.  Additionally the shim (when run outside of Rye managed
+  projects) supports a special first parameter <code>+VERSION</code> which requests a
+  specific version of Python (eg: <code>python +3.8</code> to request Python 3.8).  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/336" title="GitHub Issue mitsuhiko/rye #336">#336</a></p>
+</li>
+<li>
+<p>Renamed the config key <code>default.dependency_operator</code> to <code>default.dependency-operator</code>
+  and <code>behavior.force_rye_managed</code> to <code>behavior.force-rye-managed</code>.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/338" title="GitHub Issue mitsuhiko/rye #338">#338</a></p>
+</li>
+</ul>
+<h2 id="080">0.8.0</h2>
+<p>Released on 2023-06-18</p>
+<ul>
+<li>
+<p>Rye for now prefers <code>&gt;=</code> over <code>~=</code> for newly added dependencies.</p>
+</li>
+<li>
+<p>The workspace member declaration is now platform independent.  If <code>members</code> is
+  now explicitly set to an empty list it will not fall back to auto discovery.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/331" title="GitHub Issue mitsuhiko/rye #331">#331</a></p>
+</li>
+<li>
+<p><code>rye add</code> now pins versions with <code>==</code> instead of <code>~=</code> when the version of the
+  package does not use at least two components.  This means that for instance it
+  will now correctly use <code>openai-whisper==20230314</code> rather than
+  <code>openai-whisper~=20230314</code> which is not actually satisfiable.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/328" title="GitHub Issue mitsuhiko/rye #328">#328</a></p>
+</li>
+<li>
+<p><code>rye install</code> now lets you install dependencies into the tool's virtualenv
+  during installation that are undeclared via the new <code>--extra-requirement</code>
+  option.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/326" title="GitHub Issue mitsuhiko/rye #326">#326</a></p>
+</li>
+<li>
+<p>Improved handling of relative path installations by setting <code>PROJECT_ROOT</code>
+  the same way as PDM does.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/321" title="GitHub Issue mitsuhiko/rye #321">#321</a></p>
+</li>
+<li>
+<p>Workspaces will now never discover <code>pyproject.toml</code> files in any dot
+  directories. (Name starting with <code>.</code>)  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/329" title="GitHub Issue mitsuhiko/rye #329">#329</a></p>
+</li>
+<li>
+<p>Fixed <code>rye build</code> not working correctly on Windows.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/327" title="GitHub Issue mitsuhiko/rye #327">#327</a></p>
+</li>
+</ul>
+<h2 id="070">0.7.0</h2>
+<p>Released on 2023-06-12</p>
+<ul>
+<li>
+<p><code>rye sync</code> and <code>rye lock</code> now accept <code>--pyproject</code>.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/296" title="GitHub Issue mitsuhiko/rye #296">#296</a></p>
+</li>
+<li>
+<p>Added JSON output to <code>rye toolchain list</code> by adding <code>--format=json</code>.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/306" title="GitHub Issue mitsuhiko/rye #306">#306</a></p>
+</li>
+<li>
+<p><code>rye version</code> can bump version by <code>--bump</code> option now.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/298" title="GitHub Issue mitsuhiko/rye #298">#298</a></p>
+</li>
+<li>
+<p>Fixed members not handled correctly in workspaces.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/300" title="GitHub Issue mitsuhiko/rye #300">#300</a></p>
+</li>
+<li>
+<p>Add <code>--clean</code> for <code>build</code> command.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/297" title="GitHub Issue mitsuhiko/rye #297">#297</a></p>
+</li>
+<li>
+<p>Fixed an issue where pip was not invoked from the right working directory
+  causing issues for workspace installations.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/292" title="GitHub Issue mitsuhiko/rye #292">#292</a></p>
+</li>
+<li>
+<p><code>rye init</code> now accepts <code>--private</code> to set the <code>Private :: Do Not Upload</code> classifier
+  that prevents uploads to PyPI.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/291" title="GitHub Issue mitsuhiko/rye #291">#291</a></p>
+</li>
+</ul>
+<h2 id="060">0.6.0</h2>
+<p>Released on 2023-06-03</p>
+<ul>
+<li>
+<p>Add <code>version</code> subcommand for rye. <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/285" title="GitHub Issue mitsuhiko/rye #285">#285</a></p>
+</li>
+<li>
+<p>Fixed <code>rye pin</code> pinning the wrong version.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/288" title="GitHub Issue mitsuhiko/rye #288">#288</a></p>
+</li>
+<li>
+<p>Calling <code>rye init</code> on the root directory no longer fails.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/274" title="GitHub Issue mitsuhiko/rye #274">#274</a></p>
+</li>
+<li>
+<p><code>rye run</code>, <code>show</code>, <code>pin</code>, <code>shell</code> and <code>build</code> now take a <code>--pyproject</code>
+  argument. <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/232" title="GitHub Issue mitsuhiko/rye #232">#232</a></p>
+</li>
+</ul>
+<h2 id="050">0.5.0</h2>
+<p>Released on 2023-05-31</p>
+<ul>
+<li>
+<p>Rye will no longer enforce a downloaded interpreter for the internal
+  toolchain.  If one has been registered that is compatible it will be
+  used.  Additionally the installer now supports the <code>RYE_TOOLCHAIN</code>
+  environment variable which allows a user to supply an already existing
+  Python interpreter at install time.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/267" title="GitHub Issue mitsuhiko/rye #267">#267</a></p>
+</li>
+<li>
+<p>The <code>publish</code> command now supports <code>--yes</code> to disable prompts.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/270" title="GitHub Issue mitsuhiko/rye #270">#270</a></p>
+</li>
+<li>
+<p>When a Python debug build (<code>Py_DEBUG</code>) is registered as custom toolchain,
+  <code>-dbg</code> is automatically appended to the name by default.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/269" title="GitHub Issue mitsuhiko/rye #269">#269</a></p>
+</li>
+<li>
+<p>lto+pgo builds are now preferred for the Python toolchain builds when
+  available.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/268" title="GitHub Issue mitsuhiko/rye #268">#268</a></p>
+</li>
+<li>
+<p>It's now possible for <code>.python-version</code> to request partial Python versions
+  in which case the latest available is used.  In particular this means that
+  a version like <code>3.10</code> can be written into <code>.python-version</code> rather than
+  <code>3.10.11</code>.  This can be accomplished by invoking <code>pin</code> with the new
+  <code>--relaxed</code> flag.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/255" title="GitHub Issue mitsuhiko/rye #255">#255</a></p>
+</li>
+<li>
+<p>Workspaces will no longer discover <code>pyproject.toml</code> files in virtualenvs
+  or <code>.git</code> folders.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/266" title="GitHub Issue mitsuhiko/rye #266">#266</a></p>
+</li>
+<li>
+<p>Adding or removing dependencies with <code>add</code> or <code>remove</code> now reformats
+  the <code>dependencies</code> array in the <code>pyproject.toml</code> file to multi-line
+  with trailing commas.  This should result in significantly better
+  diffing behavior out of the box.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/263" title="GitHub Issue mitsuhiko/rye #263">#263</a></p>
+</li>
+<li>
+<p>Default build-system and license can be specified in global config.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/244" title="GitHub Issue mitsuhiko/rye #244">#244</a></p>
+</li>
+<li>
+<p>Fixed an issue where the <code>init</code> command would not let you create
+  <code>flit</code> based projects.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/254" title="GitHub Issue mitsuhiko/rye #254">#254</a></p>
+</li>
+<li>
+<p>Resolve an error ("No such file or directory") shown after updates on
+  Linux machines.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/252" title="GitHub Issue mitsuhiko/rye #252">#252</a></p>
+</li>
+<li>
+<p>The built-in updater now validates checksums of updates when updates have
+  SHA-256 hashes available.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/253" title="GitHub Issue mitsuhiko/rye #253">#253</a></p>
+</li>
+<li>
+<p><code>init</code> now accepts <code>--no-pin</code> to not create a <code>.python-version</code> file.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/247" title="GitHub Issue mitsuhiko/rye #247">#247</a></p>
+</li>
+</ul>
+<h2 id="040">0.4.0</h2>
+<p>Released on 2023-05-29</p>
+<ul>
+<li>
+<p>Releases starting with <code>0.4.0</code> onwards are published with SHA256 checksum
+  files for all release assets.  These files are not yet validated by the
+  installer or updater however.</p>
+</li>
+<li>
+<p>The <code>install</code> command can now install tools from custom indexes.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/240" title="GitHub Issue mitsuhiko/rye #240">#240</a></p>
+</li>
+<li>
+<p>Virtualenvs on Unix are now created with a hack to pre-configure TCL and
+  TKinter.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/233" title="GitHub Issue mitsuhiko/rye #233">#233</a></p>
+</li>
+<li>
+<p>Fix invalid version error when using rye init with custom toolchain.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/234" title="GitHub Issue mitsuhiko/rye #234">#234</a></p>
+</li>
+<li>
+<p>Failed tool installations now properly clean up.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/225" title="GitHub Issue mitsuhiko/rye #225">#225</a></p>
+</li>
+<li>
+<p>Correctly swap the rye executable on windows when performing an update
+  to a git version via <code>self update</code>.</p>
+</li>
+</ul>
+<h2 id="030">0.3.0</h2>
+<p>Released on 2023-05-27</p>
+<ul>
+<li>
+<p>Support retrieving username and repository-url from credentials if not
+  provided for the <code>publish</code> command.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/217" title="GitHub Issue mitsuhiko/rye #217">#217</a></p>
+</li>
+<li>
+<p>The installer now validates the availability of shared libraries
+  on Linux with <code>ldd</code> and emits an error with additional information
+  if necessary shared libraries are missing.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/220" title="GitHub Issue mitsuhiko/rye #220">#220</a></p>
+</li>
+<li>
+<p>It's now possible to configure http and https proxies.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/215" title="GitHub Issue mitsuhiko/rye #215">#215</a></p>
+</li>
+<li>
+<p>If a package is not found because it only has matching pre-releases,
+  a warning is now printed to tell the user to pass <code>--pre</code>.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/218" title="GitHub Issue mitsuhiko/rye #218">#218</a></p>
+</li>
+<li>
+<p>Add <code>--username</code> parameter for rye publish.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/211" title="GitHub Issue mitsuhiko/rye #211">#211</a></p>
+</li>
+<li>
+<p>The shims are now more resilient.  Previously a <code>pyproject.toml</code> file
+  caused in all cases a virtualenv to be created.  Now this will only
+  happen when the <code>rye.tool.managed</code> flag is set to <code>true</code>.  The old
+  behavior can be forced via the global config.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/212" title="GitHub Issue mitsuhiko/rye #212">#212</a></p>
+</li>
+</ul>
+<h2 id="020">0.2.0</h2>
+<p>Released on 2023-05-23</p>
+<ul>
+<li>
+<p>Resolved a bug where on Windows hitting the shift key (or some other keys)
+  in confirm prompts would cause an error.</p>
+</li>
+<li>
+<p>The installer on Windows now warns if symlinks are not enabled and directs
+  the user to enable developer mode.  The <code>--version</code> output now also
+  shows if symlinks are available.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/205" title="GitHub Issue mitsuhiko/rye #205">#205</a></p>
+</li>
+<li>
+<p>Support auto fix requires-python when there is a conflict. <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/160" title="GitHub Issue mitsuhiko/rye #160">#160</a></p>
+</li>
+<li>
+<p>Added support for custom indexes.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/199" title="GitHub Issue mitsuhiko/rye #199">#199</a></p>
+</li>
+<li>
+<p><code>rye add</code> no longer complains when a local version information is
+  in the version.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/199" title="GitHub Issue mitsuhiko/rye #199">#199</a></p>
+</li>
+</ul>
+<h2 id="012">0.1.2</h2>
+<p>Released on 2023-05-22</p>
+<ul>
+<li>
+<p>Fixed dev-dependencies not being installed when using workspace.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/170" title="GitHub Issue mitsuhiko/rye #170">#170</a></p>
+</li>
+<li>
+<p><code>init</code> no longer creates invalid flit config.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/195" title="GitHub Issue mitsuhiko/rye #195">#195</a></p>
+</li>
+<li>
+<p>Support direct references when adding a package.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/158" title="GitHub Issue mitsuhiko/rye #158">#158</a></p>
+</li>
+<li>
+<p>Fixed a bug with uninstall on Unix platforms.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/197" title="GitHub Issue mitsuhiko/rye #197">#197</a></p>
+</li>
+</ul>
+<h2 id="011">0.1.1</h2>
+<p>Released on 2023-05-18</p>
+<ul>
+<li>
+<p>The installer on windows will now ask for a key to be pressed so it does
+  not close the window without information.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/183" title="GitHub Issue mitsuhiko/rye #183">#183</a></p>
+</li>
+<li>
+<p>Fixed an issue on macOS where the installer would die with "os error 24"
+  when directly piped to bash.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/184" title="GitHub Issue mitsuhiko/rye #184">#184</a></p>
+</li>
+</ul>
+<h2 id="010">0.1.0</h2>
+<p>Released on 2023-05-17</p>
+<ul>
+<li>
+<p>Rye now comes with binary releases for some platforms.</p>
+</li>
+<li>
+<p>A new <code>self uninstall</code> command was added to uninstall rye and the new
+  <code>self update</code> command updates to the latest release version.</p>
+</li>
+<li>
+<p>Rye now includes a <code>publish</code> command for publishing Python packages to a
+  package repository.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/86" title="GitHub Issue mitsuhiko/rye #86">#86</a></p>
+</li>
+<li>
+<p>Script declarations in <code>pyproject.toml</code> now permit chaining and custom
+  environment variables.  <a class="gh-link gh-issue" href="https://github.com/mitsuhiko/rye/issues/153" title="GitHub Issue mitsuhiko/rye #153">#153</a></p>
+</li>
+<li>
+<p>Added <code>tools install</code> and <code>tools uninstall</code> as aliases for <code>install</code> and
+  <code>uninstall</code> and added <code>tools list</code> to show all installed tools.</p>
+</li>
+<li>
+<p>Rye is now capable of downloading a selected set of PyPy releases.  To do
+  so use <code>rye pin pypy@3.9.16</code> or any other supported PyPy release.</p>
+</li>
+<li>
+<p>Custom cpython toolchains are now registered just as <code>cpython</code> rather
+  than <code>custom-cpython</code>.</p>
+</li>
+<li>
+<p>Rye now supports Python down to 3.7.</p>
+</li>
+<li>
+<p>Rye's <code>self</code> command now includes a <code>completion</code> subcommand to generate
+  a completion script for your shell.</p>
+</li>
+<li>
+<p>The downloaded Python distributions are now validated against the
+  SHA-256 hashes.</p>
+</li>
+<li>
+<p>Rye now builds on windows.  This is even more experimental though
+  than support for Linux and macOS.</p>
+</li>
+<li>
+<p>Added <code>--features</code> and <code>--all-features</code> for <code>lock</code> and <code>sync</code>.</p>
+</li>
+<li>
+<p>Rye will now look at the <code>RYE_HOME</code> to determine the location of the
+  <code>.rye</code> folder.  If it's not set, <code>$HOME/.rye</code> is used as before.</p>
+</li>
+<li>
+<p>Rye now has a most consistent handling for virtualenv versions.  If
+  <code>.python-version</code> is provided, that version is used.  Otherwise if
+  <code>requires-python</code> is set in the <code>pyproject.toml</code>, that version is used
+  instead.  When a new project is created the <code>.python-version</code> file is
+  written and the current latest cpython version is picked.</p>
+</li>
+<li>
+<p>It's now possible to explicitly set the <code>name</code> of the project when
+  initializing a new one.</p>
+</li>
+<li>
+<p>Rye's <code>init</code> command now attempts to initialize projects with <code>git</code> and
+  will automatically create a <code>src/project_name/__init__.py</code> file.</p>
+</li>
+<li>
+<p>Rye can now also generate a license text when initializing projects.</p>
+</li>
+<li>
+<p>Rye now supports negative (exclusion) dependencies.  These can be used to
+  prevent a dependency from installing, even if something else in the graph
+  depends on it.  Use <code>rye add --exclude package-name</code> to add such a dependency.</p>
+</li>
+<li>
+<p><code>sync</code> now accepts <code>--no-lock</code> to prevent updating the lock file.</p>
+</li>
+<li>
+<p>Rye's <code>add</code> command now accepts a <code>--pre</code> parameter to include pre-release.</p>
+</li>
+<li>
+<p>Rye's <code>pin</code> command now updates the pyproject.toml requires-python.</p>
+</li>
+<li>
+<p>Rye's <code>install</code> command now accepts a <code>--include-dep</code> parameter to include
+  scripts from one or more given dependencies.</p>
+</li>
+<li>
+<p>Rye now honors <code>requires-python</code> in the <code>add</code> command.  This means the the
+  initial resolution will not pick a version higher than what's supported by
+  the lower boundary.</p>
+</li>
+<li>
+<p>When installing packages as global tools, a warning is now emitted if there
+  were no scripts in the package.  Additionally installing packages from local
+  paths and zip files is now supported.</p>
+</li>
+<li>
+<p>A <code>rye self update</code> command was added to compile and install the latest
+  version via cargo.</p>
+</li>
+<li>
+<p>Added more convenient ways to install from git/urls by supplying a <code>--git</code>
+  or <code>--url</code> parameter.  This will behind the scenes format a PEP 508 requirement
+  string.</p>
+</li>
+<li>
+<p>Added a <code>shell</code> command which will spawn a shell with the virtualenv activated.</p>
+</li>
+<li>
+<p>Added a <code>make-req</code> command to conveniently format out PEP 508 requirement
+  strings from parts.</p>
+</li>
+<li>
+<p>The internal virtualenv used to manage <code>pip-tools</code> and other libraries now
+  automatically updates when necessary.</p>
+</li>
+<li>
+<p><code>rye toolchain register</code> can now be used to register a local python installation
+  as toolchain with rye.</p>
+</li>
+<li>
+<p><code>rye build</code> was added to allow building <code>sdist</code> and <code>bdist_wheel</code> distributions.</p>
+</li>
+<li>
+<p>Rye now correctly handles whitespace in folder names.</p>
+</li>
+</ul>
+<!-- END INCLUDE -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../community/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Community" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Community
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../philosophy/" class="md-footer__link md-footer__link--next" aria-label="Next: Philosophy" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Philosophy
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 Armin Ronacher
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/mitsuhiko" target="_blank" rel="noopener" title="Follow @mitsuhiko on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/@mitsuhiko" target="_blank" rel="noopener" title="Follow @mitsuhiko on Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://bsky.app/profile/mitsuhiko.at" target="_blank" rel="noopener" title="Follow @mitsuhiko.at on Bluesky" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m10 7.5V9a2 2 0 0 0-2-2H9v10h4a2 2 0 0 0 2-2v-1.5c0-.8-.7-1.5-1.5-1.5.8 0 1.5-.7 1.5-1.5M13 15h-2v-2h2v2m0-4h-2V9h2v2Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://discord.gg/drbkcdtSbg" target="_blank" rel="noopener" title="Discuss Rye on Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.action.edit", "toc.integrate", "toc.follow", "navigation.path", "navigation.top", "navigation.tabs", "navigation.footer"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,104 @@
+[data-md-color-scheme="default"],
+:root {
+    --md-primary-fg-color: #7C9F35;
+    --md-primary-fg-color--light: #ADC541;
+    --md-primary-fg-color--dark: #9BB029;
+    --md-accent-fg-color: #54780d;
+}
+
+[data-md-color-scheme="slate"] {
+    --md-hue: 190;
+    --md-accent-fg-color: #90c820;
+}
+
+.md-header {
+    background: url(/static/banner.png) repeat-x;
+    background-color: var(--md-primary-fg-color);
+    background-size: 605px 75px;
+}
+
+nav.md-tabs {
+    background: url(/static/banner-dark.png) repeat-x;
+    background-color: transparent;
+    background-size: 605px 75px;
+}
+
+[data-md-component="palette"] {
+    display: none;
+}
+
+/* version changed */
+:root {
+    /* Icon for "version-added" admonition: Material Design Icons "plus-box-outline" */
+    --md-admonition-icon--version-added: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19V5H5v14h14m0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-8 4h2v4h4v2h-4v4h-2v-4H7v-2h4V7Z"/></svg>');
+    /* Icon for "version-changed" admonition: Material Design Icons "delta" */
+    --md-admonition-icon--version-changed: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7.77 18.39 18H5.61L12 7.77M12 4 2 20h20"/></svg>');
+    /* Icon for "version-removed" admonition: Material Design Icons "minus-circle-outline" */
+    --md-admonition-icon--version-removed: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2M7 13h10v-2H7"/></svg>');
+}
+
+.md-typeset .admonition.version-added,
+.md-typeset .admonition.version-changed,
+.md-typeset .admonition.version-removed {
+    border-radius: 3px;
+}
+
+.md-typeset .admonition.version-added p.admonition-title,
+.md-typeset .admonition.version-changed p.admonition-title,
+.md-typeset .admonition.version-removed p.admonition-title {
+    font-weight: normal;
+}
+
+/* "version-added" admonition in green */
+.md-typeset .admonition.version-added,
+.md-typeset details.version-added {
+    border-color: rgb(11, 129, 38);
+}
+
+.md-typeset .version-added>.admonition-title,
+.md-typeset .version-added>summary {
+    background-color: rgba(4, 91, 40, 0.1);
+}
+
+.md-typeset .version-added>.admonition-title::before,
+.md-typeset .version-added>summary::before {
+    background-color: rgb(0, 200, 83);
+    -webkit-mask-image: var(--md-admonition-icon--version-added);
+    mask-image: var(--md-admonition-icon--version-added);
+}
+
+/* "version-changed" admonition in orange */
+.md-typeset .admonition.version-changed,
+.md-typeset details.version-changed {
+    border-color: rgb(255, 145, 0);
+}
+
+.md-typeset .version-changed>.admonition-title,
+.md-typeset .version-changed>summary {
+    background-color: rgba(255, 145, 0, .1);
+}
+
+.md-typeset .version-changed>.admonition-title::before,
+.md-typeset .version-changed>summary::before {
+    background-color: rgb(255, 145, 0);
+    -webkit-mask-image: var(--md-admonition-icon--version-changed);
+    mask-image: var(--md-admonition-icon--version-changed);
+}
+
+/* "version-removed" admonition in red */
+.md-typeset .admonition.version-removed,
+.md-typeset details.version-removed {
+    border-color: rgb(255, 82, 82);
+}
+
+.md-typeset .version-removed>.admonition-title,
+.md-typeset .version-removed>summary {
+    background-color: rgba(255, 82, 82, .1);
+}
+
+.md-typeset .version-removed>.admonition-title::before,
+.md-typeset .version-removed>summary::before {
+    background-color: rgb(255, 82, 82);
+    -webkit-mask-image: var(--md-admonition-icon--version-removed);
+    mask-image: var(--md-admonition-icon--version-removed);
+}
