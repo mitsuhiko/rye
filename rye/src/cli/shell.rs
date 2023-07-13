@@ -1,10 +1,12 @@
 use std::env;
 use std::path::PathBuf;
+use std::process;
 use std::process::Command;
 
 use anyhow::{bail, Context, Error};
 use clap::Parser;
 use console::style;
+use sysinfo::{Pid, PidExt, ProcessExt, System, SystemExt};
 
 use crate::pyproject::PyProject;
 use crate::sync::{sync, SyncOptions};
@@ -25,6 +27,44 @@ pub struct Args {
     pyproject: Option<PathBuf>,
 }
 
+fn get_shell() -> Result<String, Error> {
+    let shell_env = env::var("SHELL");
+    if let Ok(shell) = shell_env {
+        return Ok(shell);
+    }
+
+    let mut system = System::default();
+    system.refresh_processes();
+
+    let mut pid = Some(Pid::from_u32(process::id()));
+    while let Some(p) = pid {
+        if let Some(process) = system.process(p) {
+            match process.name() {
+                "cmd.exe" => {
+                    return Ok(String::from("cmd.exe"));
+                }
+                "powershell.exe" => {
+                    return Ok(String::from("powershell.exe"));
+                }
+                "pwsh.exe" => {
+                    return Ok(String::from("pwsh.exe"));
+                }
+                &_ => {
+                    pid = process.parent();
+                    continue;
+                }
+            }
+        }
+        break;
+    }
+
+    Err(anyhow::anyhow!("don't know which shell is used"))
+}
+
+fn is_ms_shells(shell: &str) -> bool {
+    matches!(shell, "cmd.exe" | "powershell.exe" | "pwsh.exe")
+}
+
 pub fn execute(cmd: Args) -> Result<(), Error> {
     if !cmd.allow_nested && env::var("__RYE_SHELL").ok().as_deref() == Some("1") {
         bail!("cannot invoke recursive rye shell");
@@ -36,14 +76,25 @@ pub fn execute(cmd: Args) -> Result<(), Error> {
         .context("failed to sync ahead of shell")?;
 
     let venv_path = pyproject.venv_path();
-    let venv_bin = venv_path.join("bin");
+    let venv_bin = if env::consts::OS == "windows" {
+        venv_path.join("Scripts")
+    } else {
+        venv_path.join("bin")
+    };
 
-    let mut shell = Command::new(env::var("SHELL")?);
-    shell.arg("-l").env("VIRTUAL_ENV", &*venv_path);
+    let s = get_shell()?;
+    let sep = if is_ms_shells(s.as_str()) { ";" } else { ":" };
+    let args = if !is_ms_shells(s.as_str()) {
+        vec!["-l"]
+    } else {
+        vec![]
+    };
+    let mut shell = Command::new(s.as_str());
+    shell.args(args).env("VIRTUAL_ENV", &*venv_path);
 
     if let Some(path) = env::var_os("PATH") {
         let mut new_path = venv_bin.as_os_str().to_owned();
-        new_path.push(":");
+        new_path.push(sep);
         new_path.push(path);
         shell.env("PATH", new_path);
     } else {
